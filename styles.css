@@ -226,25 +226,20 @@ section { padding:5.5rem 5%; }
    HERO
 ══════════════════════════════════════ */
 .hero {
-  min-height:92vh; display:flex; align-items:center;
+  min-height:95vh; display:flex; align-items:center;
   padding:0 5%; position:relative; overflow:hidden;
-  background:linear-gradient(160deg, #ffffff 0%, #e0f6fd 40%, #f0fdfb 100%);
+  background: linear-gradient(145deg, #f0fbff 0%, #e8f8fd 30%, #f5fffe 60%, #fff8f0 100%);
 }
 @media (prefers-color-scheme: dark) {
-  .hero { background:linear-gradient(160deg, #0F172A 0%, #0c2340 50%, #0a1f2e 100%); }
+  .hero { background:linear-gradient(145deg, #0a0f1e 0%, #0d1a2e 40%, #0a1f1a 100%); }
 }
 .hero-grid {
   position:absolute; inset:0; pointer-events:none;
   background-image:
-    linear-gradient(rgba(19,178,228,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(19,178,228,.06) 1px, transparent 1px);
+    linear-gradient(rgba(19,178,228,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19,178,228,.055) 1px, transparent 1px);
   background-size:52px 52px;
-}
-.hero-blob {
-  position:absolute; right:-5%; top:50%; transform:translateY(-50%);
-  width:55%; aspect-ratio:1; border-radius:50%;
-  background:radial-gradient(ellipse, rgba(19,178,228,.12) 0%, transparent 65%);
-  pointer-events:none;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
 }
 .hero-content { position:relative; z-index:1; max-width:680px; }
 .hero-badge {
@@ -281,8 +276,14 @@ section { padding:5.5rem 5%; }
    STATS BAR
 ══════════════════════════════════════ */
 .stats-bar {
-  background:var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, #0e94c2 50%, var(--accent) 100%);
   padding:2rem 5%;
+  position: relative; overflow: hidden;
+}
+.stats-bar::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
 }
 .stats-inner { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; }
 .stat-item {
@@ -583,6 +584,46 @@ footer {
 .footer-legal { display:flex; gap:1.5rem; }
 .footer-legal a { color:rgba(255,255,255,.35); font-size:.78rem; transition:color .25s; }
 .footer-legal a:hover { color:var(--primary); }
+
+/* ══════════════════════════════════════
+   MARQUEE TICKER
+══════════════════════════════════════ */
+.marquee-section {
+  background: var(--text);
+  padding: .85rem 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.marquee-track { display: flex; flex-direction: column; gap: .55rem; }
+.marquee-row { overflow: hidden; white-space: nowrap; }
+.marquee-inner {
+  display: inline-flex; align-items: center; gap: 1.25rem;
+  white-space: nowrap;
+}
+.marquee-left  .marquee-inner { animation: scrollLeft  28s linear infinite; }
+.marquee-right .marquee-inner { animation: scrollRight 32s linear infinite; }
+
+@keyframes scrollLeft  { from { transform: translateX(0); }   to { transform: translateX(-50%); } }
+@keyframes scrollRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+.marquee-section:hover .marquee-inner { animation-play-state: paused; }
+
+.marquee-item {
+  display: inline-flex; align-items: center; gap: .45rem;
+  font-family: 'Montserrat', sans-serif; font-size: .78rem; font-weight: 700;
+  letter-spacing: .07em; text-transform: uppercase;
+  color: rgba(255,255,255,.75);
+  background: rgba(255,255,255,.06);
+  padding: .38rem .9rem; border-radius: 100px;
+  border: 1px solid rgba(255,255,255,.1);
+  transition: color .2s, background .2s;
+  flex-shrink: 0;
+}
+.marquee-item i { color: var(--primary); font-size: .75rem; }
+.marquee-item.marquee-orange { color: var(--secondary); border-color: rgba(249,115,22,.3); background: rgba(249,115,22,.08); }
+.marquee-item.marquee-orange i { color: var(--secondary); }
+.marquee-sep { color: var(--primary); font-size: .65rem; opacity: .5; flex-shrink: 0; }
 
 /* ══════════════════════════════════════
    GRADIENT TEXT
