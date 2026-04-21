@@ -53,18 +53,37 @@
 
 <!-- ── HERO ── -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+  <!-- animated blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <!-- floating icons -->
+  <div class="hero-float" style="top:18%;left:8%;animation-delay:0s;">📱</div>
+  <div class="hero-float" style="top:22%;right:12%;animation-delay:1.2s;">💻</div>
+  <div class="hero-float" style="bottom:28%;left:6%;animation-delay:2.1s;">🔧</div>
+  <div class="hero-float" style="bottom:20%;right:8%;animation-delay:.6s;">⚡</div>
   <div class="hero-content">
     <div class="hero-badge"><div class="pulse"></div> Same Day Repairs Available</div>
-    <h1>Your Device Repair<br><span class="accent">Experts</span></h1>
+    <h1>Your Device Repair<br><span class="gradient-text">Experts</span></h1>
     <p class="hero-sub">Professional repairs for iPhones, iPads, and MacBooks. Quality parts, expert technicians, and guaranteed satisfaction.</p>
     <div class="hero-btns">
-      <a href="contact.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Book a Repair</a>
+      <a href="contact.html" class="btn-primary ripple"><i class="fas fa-calendar-check"></i> Book a Repair</a>
       <a href="services.html" class="btn-secondary"><i class="fas fa-tools"></i> View Services</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><i class="fas fa-shield-halved"></i> 90-Day Warranty</div>
+      <div class="trust-item"><i class="fas fa-ban"></i> No Fix, No Fee</div>
+      <div class="trust-item"><i class="fas fa-star" style="color:var(--warning)"></i> 5.0 Google Rating</div>
     </div>
   </div>
 </section>
+<!-- wave divider -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="var(--primary)"/>
+  </svg>
+</div>
 
 <!-- ── STATS BAR ── -->
 <div class="stats-bar">
@@ -115,7 +134,7 @@
     <h2 class="s-title">Our Repair Services</h2>
     <p class="s-sub">Professional repairs for your devices with fast turnaround times.</p>
   </div>
-  <div class="services-grid">
+  <div class="services-grid stagger">
     <div class="srv-card reveal">
       <div class="srv-icon"><i class="fas fa-mobile-screen-button"></i></div>
       <h3>Phone Repairs</h3>
@@ -214,7 +233,7 @@
     <h2 class="s-title">Why Choose Dr. Fixit Mobile?</h2>
     <p class="s-sub">We are committed to providing the best repair experience possible.</p>
   </div>
-  <div class="why-grid">
+  <div class="why-grid stagger">
     <div class="why-card reveal">
       <div class="why-icon"><i class="fas fa-shield-halved"></i></div>
       <h3>Quality Guaranteed</h3>
@@ -244,7 +263,7 @@
       <span style="color:var(--text-muted);font-size:.9rem;">— Based on Google Reviews</span>
     </div>
   </div>
-  <div class="reviews-grid" style="margin-top:2.5rem;">
+  <div class="reviews-grid stagger" style="margin-top:2.5rem;">
     <div class="review-card reveal">
       <div class="review-stars">★★★★★</div>
       <p class="review-text">Less than 24 hour turnaround for a charging port replacement on an older tablet. Most other repair shops I contacted were either unable or unwilling to perform the replacement. Up-front and honest quote before starting any work, as well.</p>
@@ -281,6 +300,12 @@
   </div>
 </section>
 
+<!-- wave into CTA -->
+<div class="wave-divider wave-light">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 C480,60 960,0 1440,40 L1440,60 L0,60 Z" fill="var(--primary)"/>
+  </svg>
+</div>
 <!-- ── FINAL CTA ── -->
 <div class="cta-banner reveal" style="margin-bottom:0;">
   <h2>Ready to Fix Your Device?</h2>
