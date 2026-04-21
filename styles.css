@@ -100,7 +100,7 @@ h1, h2, h3, h4, h5 {
   display:flex; align-items:center; justify-content:center; font-size:1rem;
   box-shadow:var(--shadow-primary);
 }
-.nav-logo-text { font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem; color:var(--text); }
+.nav-logo-text { font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem; color:var(--secondary); }
 .nav-logo-text span { color:var(--primary); }
 
 .nav-phone {
@@ -571,7 +571,7 @@ footer {
   background:linear-gradient(135deg, var(--primary), var(--accent));
   display:flex; align-items:center; justify-content:center; font-size:1rem;
 }
-.footer-logo-text { font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem; color:#fff; }
+.footer-logo-text { font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem; color:var(--secondary); }
 .footer-logo-text span { color:var(--primary); }
 .footer-brand p { color:rgba(255,255,255,.55); font-size:.85rem; line-height:1.75; margin-top:1rem; max-width:300px; }
 .footer-socials { display:flex; gap:.6rem; margin-top:1.25rem; }
