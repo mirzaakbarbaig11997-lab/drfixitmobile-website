@@ -93,15 +93,8 @@ h1, h2, h3, h4, h5 {
   .nav { background:rgba(15,23,42,.92); }
 }
 
-.nav-logo { display:flex; align-items:center; gap:.65rem; flex-shrink:0; }
-.nav-logo-icon {
-  width:38px; height:38px; border-radius:10px;
-  background:linear-gradient(135deg, var(--primary), var(--accent));
-  display:flex; align-items:center; justify-content:center; font-size:1rem;
-  box-shadow:var(--shadow-primary);
-}
-.nav-logo-text { font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem; color:var(--secondary); }
-.nav-logo-text span { color:var(--primary); }
+.nav-logo { display:flex; align-items:center; flex-shrink:0; }
+.logo-img { height:40px; width:auto; object-fit:contain; display:block; }
 
 .nav-phone {
   display:flex; align-items:center; gap:.4rem;
@@ -566,13 +559,7 @@ footer {
   padding:4rem 5% 2rem;
 }
 .footer-top { display:grid; grid-template-columns:2fr 1fr 1fr 1.5fr; gap:3rem; margin-bottom:3rem; }
-.footer-logo-icon {
-  width:38px; height:38px; border-radius:10px;
-  background:linear-gradient(135deg, var(--primary), var(--accent));
-  display:flex; align-items:center; justify-content:center; font-size:1rem;
-}
-.footer-logo-text { font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem; color:var(--secondary); }
-.footer-logo-text span { color:var(--primary); }
+.footer .logo-img { height:38px; filter:brightness(0) invert(1); }
 .footer-brand p { color:rgba(255,255,255,.55); font-size:.85rem; line-height:1.75; margin-top:1rem; max-width:300px; }
 .footer-socials { display:flex; gap:.6rem; margin-top:1.25rem; }
 .social {
