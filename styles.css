@@ -995,3 +995,11 @@ footer .logo-img { height: 36px; filter: none; }
   .pay4-wrap { padding:2rem 1.5rem; }
   .contact-grid { gap:2rem; }
 }
+
+/* ── QuickFixCRM widget always on top ── */
+[data-slug="mirza-akbar-baig-mnp59nxa"],
+iframe[src*="quickfixcrm"],
+div[id*="qfcrm"], div[class*="qfcrm"],
+div[id*="quickfix"], div[class*="quickfix"] {
+  z-index: 99999 !important;
+}
