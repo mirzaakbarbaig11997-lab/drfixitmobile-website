@@ -13,10 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Mobile hamburger ──
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
-  hamburger?.addEventListener('click', () => mobileMenu?.classList.toggle('open'));
-  mobileMenu?.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => mobileMenu.classList.remove('open'))
+
+  const overlay = document.createElement('div');
+  overlay.className = 'menu-overlay';
+  document.body.appendChild(overlay);
+
+  function openMenu()  { mobileMenu?.classList.add('open');    overlay.classList.add('active'); }
+  function closeMenu() { mobileMenu?.classList.remove('open'); overlay.classList.remove('active'); }
+
+  hamburger?.addEventListener('click', () =>
+    mobileMenu?.classList.contains('open') ? closeMenu() : openMenu()
   );
+  overlay.addEventListener('click', closeMenu);
+  mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
   // ── Scroll reveal (single + directional + stagger) ──
   const revealObs = new IntersectionObserver(entries => {

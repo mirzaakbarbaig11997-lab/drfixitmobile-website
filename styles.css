@@ -124,12 +124,19 @@ h1, h2, h3, h4, h5 {
 .hamburger { display:none; background:none; border:none; color:var(--text); font-size:1.25rem; cursor:pointer; margin-left:auto; }
 
 .mobile-menu {
-  display:none; position:fixed; top:62px; left:0; right:0;
-  background:var(--bg-card); border-bottom:1px solid var(--border);
+  display:none; position:fixed; top:62px; left:0; right:0; bottom:0;
+  background:var(--bg-card);
   padding:1.25rem 5%; z-index:999; flex-direction:column; gap:.35rem;
-  box-shadow:var(--shadow);
+  box-shadow:var(--shadow); overflow-y:auto;
 }
 .mobile-menu.open { display:flex; }
+
+/* Dim overlay behind open menu */
+.menu-overlay {
+  display:none; position:fixed; inset:0; top:62px;
+  background:rgba(0,0,0,.45); z-index:998;
+}
+.menu-overlay.active { display:block; }
 .mobile-menu a {
   color:var(--text-muted); font-size:.95rem; padding:.65rem 0;
   border-bottom:1px solid var(--border); transition:color .25s;
@@ -510,6 +517,17 @@ section { padding:5.5rem 5%; }
 }
 .cta-banner .btn-ghost:hover { background:rgba(255,255,255,.25); }
 
+/* Secondary button inside CTA banners needs white text, not blue */
+.cta-banner .btn-secondary,
+.doorstep-banner .btn-secondary {
+  color:#fff; border-color:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.12);
+}
+.cta-banner .btn-secondary:hover,
+.doorstep-banner .btn-secondary:hover {
+  background:rgba(255,255,255,.25); border-color:#fff;
+}
+
 /* ══════════════════════════════════════
    STAFF BAR
 ══════════════════════════════════════ */
@@ -860,12 +878,6 @@ footer .logo-img { height: 36px; filter: none; }
    PAGE HERO UPGRADE
 ══════════════════════════════════════ */
 .page-hero { position: relative; overflow: hidden; }
-.page-hero::after {
-  content: '';
-  position: absolute; bottom: -1px; left: 0; right: 0; height: 60px;
-  background: var(--bg);
-  clip-path: ellipse(55% 100% at 50% 100%);
-}
 
 /* ══════════════════════════════════════
    ANIMATIONS
