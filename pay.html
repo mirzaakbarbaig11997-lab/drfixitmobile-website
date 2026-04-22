@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pay in 4 | Dr. Fixit Mobile</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .pay-page {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 100px 5% 60px; background: var(--bg-muted);
+    }
+    .pay-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: 24px; padding: 2.75rem; width: 100%; max-width: 480px;
+      box-shadow: var(--shadow-lg);
+    }
+    .pay-logo { display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; }
+    .pay-logo img { height: 44px; }
+    .pay-title { font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: .4rem; }
+    .pay-sub { color: var(--text-muted); font-size: .9rem; text-align: center; margin-bottom: 2rem; line-height: 1.6; }
+    .pay-badge {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      background: #f0f9ff; border: 1.5px solid #bae6fd; border-radius: 12px;
+      padding: .75rem 1rem; margin-bottom: 2rem; font-size: .82rem; font-weight: 600; color: #0369a1;
+    }
+    .pay-badge i { color: #0ea5e9; }
+    .field { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.1rem; }
+    .field label { font-size: .78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; font-family: 'Montserrat', sans-serif; }
+    .field input {
+      background: var(--bg-muted); border: 1.5px solid var(--border);
+      border-radius: 10px; padding: .75rem 1rem; font-size: .95rem;
+      color: var(--text); font-family: 'Inter', sans-serif; outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+    .amount-wrap { position: relative; }
+    .amount-wrap input { padding-left: 2.2rem; font-size: 1.2rem; font-weight: 700; }
+    .amount-prefix { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-weight: 700; color: var(--text-muted); font-size: 1rem; }
+    .pay4-preview {
+      background: var(--bg-muted); border-radius: 12px; padding: 1rem;
+      margin-bottom: 1.5rem; display: none;
+    }
+    .pay4-preview p { font-size: .78rem; color: var(--text-muted); margin-bottom: .6rem; text-align: center; }
+    .pay4-chips { display: flex; gap: .4rem; justify-content: center; }
+    .pay4-chip {
+      flex: 1; background: #fff; border: 1.5px solid var(--border);
+      border-radius: 8px; padding: .5rem .25rem; text-align: center;
+    }
+    .pay4-chip strong { display: block; font-size: .95rem; color: var(--primary); font-weight: 800; }
+    .pay4-chip span { font-size: .65rem; color: var(--text-muted); }
+    .btn-pay {
+      width: 100%; background: #392fd3; color: #fff;
+      border: none; border-radius: 12px; padding: 1rem; font-size: 1rem; font-weight: 700;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      transition: all .25s; box-shadow: 0 4px 20px rgba(57,47,211,.3);
+    }
+    .btn-pay:hover { background: #2d25b3; transform: translateY(-1px); }
+    .btn-pay:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+    .sezzle-brand { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: 1rem; font-size: .75rem; color: var(--text-muted); }
+    .sezzle-brand img { height: 18px; }
+    .error-msg { background: #fef2f2; border: 1.5px solid #fecaca; color: #dc2626; border-radius: 10px; padding: .75rem 1rem; font-size: .85rem; margin-bottom: 1rem; display: none; }
+    .cancel-note { text-align: center; margin-top: 1rem; font-size: .78rem; color: var(--text-muted); }
+    .cancel-note a { color: var(--primary); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Dr. Fixit Mobile" class="logo-img">
+  </a>
+  <a href="tel:6477604786" class="nav-phone"><i class="fas fa-phone"></i> (647) 760-4786</a>
+  <div class="nav-actions">
+    <a href="contact.html" class="btn-book">Book Repair</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><i class="fas fa-bars"></i></button>
+</nav>
+
+<div class="pay-page">
+  <div class="pay-card">
+    <div class="pay-logo">
+      <img src="logo.jpg" alt="Dr. Fixit Mobile">
+    </div>
+    <h1 class="pay-title">Pay Your Repair Bill</h1>
+    <p class="pay-sub">Split your repair cost into 4 interest-free payments with Sezzle. No hidden fees.</p>
+
+    <div class="pay-badge">
+      <i class="fas fa-shield-halved"></i>
+      Secure checkout powered by Sezzle &nbsp;·&nbsp; 0% interest
+    </div>
+
+    <div class="error-msg" id="errorMsg"></div>
+
+    <form id="payForm">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <div class="field">
+          <label>First Name *</label>
+          <input type="text" id="first_name" placeholder="John" required>
+        </div>
+        <div class="field">
+          <label>Last Name *</label>
+          <input type="text" id="last_name" placeholder="Doe" required>
+        </div>
+      </div>
+      <div class="field">
+        <label>Email Address *</label>
+        <input type="email" id="email" placeholder="john@example.com" required>
+      </div>
+      <div class="field">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="(403) 555-0000">
+      </div>
+      <div class="field">
+        <label>Repair Description</label>
+        <input type="text" id="description" placeholder="e.g. iPhone 15 Pro Screen Replacement">
+      </div>
+      <div class="field">
+        <label>Total Amount (CAD) *</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input type="number" id="amount" placeholder="0.00" min="40" step="0.01" required>
+        </div>
+      </div>
+
+      <div class="pay4-preview" id="pay4Preview">
+        <p>Your 4 payments (every 2 weeks)</p>
+        <div class="pay4-chips">
+          <div class="pay4-chip"><strong id="p1">—</strong><span>Today</span></div>
+          <div class="pay4-chip"><strong id="p2">—</strong><span>Week 2</span></div>
+          <div class="pay4-chip"><strong id="p3">—</strong><span>Week 4</span></div>
+          <div class="pay4-chip"><strong id="p4">—</strong><span>Week 6</span></div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-pay" id="payBtn">
+        <i class="fas fa-lock"></i> Pay with Sezzle
+      </button>
+    </form>
+
+    <div class="sezzle-brand">
+      <i class="fas fa-lock" style="color:#392fd3;font-size:.7rem;"></i>
+      Secured &amp; processed by Sezzle
+    </div>
+    <p class="cancel-note">
+      Questions? Call us at <a href="tel:6477604786">(647) 760-4786</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  // Show pay-in-4 breakdown as user types amount
+  document.getElementById('amount').addEventListener('input', function() {
+    const amt = parseFloat(this.value);
+    const preview = document.getElementById('pay4Preview');
+    if (!isNaN(amt) && amt >= 40) {
+      const each = (amt / 4).toFixed(2);
+      ['p1','p2','p3','p4'].forEach(id => document.getElementById(id).textContent = '$' + each);
+      preview.style.display = 'block';
+    } else {
+      preview.style.display = 'none';
+    }
+  });
+
+  document.getElementById('payForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('payBtn');
+    const errEl = document.getElementById('errorMsg');
+    errEl.style.display = 'none';
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating secure checkout…';
+
+    const payload = {
+      first_name:  document.getElementById('first_name').value.trim(),
+      last_name:   document.getElementById('last_name').value.trim(),
+      email:       document.getElementById('email').value.trim(),
+      phone:       document.getElementById('phone').value.trim(),
+      description: document.getElementById('description').value.trim(),
+      amount_cad:  document.getElementById('amount').value
+    };
+
+    try {
+      const res  = await fetch('/api/sezzle/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+      } else {
+        throw new Error(data.error || 'Unexpected error');
+      }
+    } catch (err) {
+      errEl.textContent = err.message;
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-lock"></i> Pay with Sezzle';
+    }
+  });
+
+  // Pre-fill from URL params if tech sent a pre-filled link
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('status') === 'cancel') {
+    const errEl = document.getElementById('errorMsg');
+    errEl.textContent = 'Payment was cancelled. Please try again or call us at (647) 760-4786.';
+    errEl.style.display = 'block';
+  }
+  ['amount','description','email','first_name','last_name'].forEach(k => {
+    if (params.get(k)) document.getElementById(k).value = params.get(k);
+  });
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

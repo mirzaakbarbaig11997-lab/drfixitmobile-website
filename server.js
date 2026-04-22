@@ -64,6 +64,83 @@ YOUR ROLE:
 - If they describe a serious hardware issue, reassure them we can assess it for free
 - If asked something outside device repair, gently redirect to repair topics`;
 
+// ── Sezzle: get auth token ──
+async function getSezzleToken() {
+  const r = await fetch('https://gateway.sezzle.com/v2/authentication', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      public_key:  process.env.SEZZLE_PUBLIC_KEY,
+      private_key: process.env.SEZZLE_PRIVATE_KEY
+    })
+  });
+  const data = await r.json();
+  if (!data.token) throw new Error('Sezzle auth failed: ' + JSON.stringify(data));
+  return data.token;
+}
+
+// ── Sezzle: create checkout session ──
+app.post('/api/sezzle/checkout', async (req, res) => {
+  const { first_name, last_name, email, phone, description, amount_cad } = req.body;
+  if (!first_name || !last_name || !email || !amount_cad) {
+    return res.status(400).json({ error: 'Missing required fields.' });
+  }
+
+  const cents = Math.round(parseFloat(amount_cad) * 100);
+  if (isNaN(cents) || cents <= 0) {
+    return res.status(400).json({ error: 'Invalid amount.' });
+  }
+
+  try {
+    const token = await getSezzleToken();
+    const refId = 'REPAIR-' + Date.now();
+
+    const r = await fetch('https://gateway.sezzle.com/v2/session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        cancel_url:   { href: 'https://drfixitmobile.ca/pay.html?status=cancel' },
+        complete_url: { href: 'https://drfixitmobile.ca/pay-success.html?ref=' + refId },
+        customer: {
+          tokenize:   false,
+          email,
+          first_name,
+          last_name,
+          phone: phone || ''
+        },
+        order: {
+          intent:                'AUTH',
+          reference_id:          refId,
+          description:           description || 'Device Repair – Dr. Fixit Mobile',
+          requires_shipping_info: false,
+          items: [{
+            name:     description || 'Device Repair',
+            sku:      'REPAIR',
+            quantity:  1,
+            price:    { amount_in_cents: cents, currency: 'CAD' }
+          }],
+          discounts:       [],
+          shipping_amount: { amount_in_cents: 0, currency: 'CAD' },
+          tax_amount:      { amount_in_cents: 0, currency: 'CAD' },
+          order_amount:    { amount_in_cents: cents, currency: 'CAD' }
+        }
+      })
+    });
+
+    const data = await r.json();
+    const checkoutLink = data.links?.find(l => l.rel === 'checkout')?.href;
+    if (!checkoutLink) throw new Error('No checkout URL returned: ' + JSON.stringify(data));
+
+    res.json({ checkout_url: checkoutLink, ref: refId });
+  } catch (err) {
+    console.error('Sezzle error:', err.message);
+    res.status(500).json({ error: 'Could not create Sezzle session. ' + err.message });
+  }
+});
+
 app.post('/api/chat', async (req, res) => {
     const { messages } = req.body;
 
