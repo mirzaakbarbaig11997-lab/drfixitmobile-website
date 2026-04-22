@@ -124,10 +124,10 @@ h1, h2, h3, h4, h5 {
 .hamburger { display:none; background:none; border:none; color:var(--text); font-size:1.25rem; cursor:pointer; margin-left:auto; }
 
 .mobile-menu {
-  display:none; position:fixed; top:62px; left:0; right:0; bottom:0;
-  background:var(--bg-card);
+  display:none; position:fixed; top:62px; left:0; right:0;
+  background:var(--bg-card); border-bottom:1px solid var(--border);
   padding:1.25rem 5%; z-index:999; flex-direction:column; gap:.35rem;
-  box-shadow:var(--shadow); overflow-y:auto;
+  box-shadow:var(--shadow);
 }
 .mobile-menu.open { display:flex; }
 
@@ -144,6 +144,7 @@ h1, h2, h3, h4, h5 {
 .mobile-menu a:last-of-type { border-bottom:none; }
 .mobile-menu a:hover { color:var(--primary); }
 .mobile-actions { display:flex; gap:.75rem; margin-top:.75rem; flex-wrap:wrap; }
+.mobile-actions a { flex:1; text-align:center; justify-content:center; }
 
 /* ══════════════════════════════════════
    BUTTONS
