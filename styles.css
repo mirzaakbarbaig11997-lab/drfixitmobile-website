@@ -37,23 +37,6 @@
   --shadow-secondary: 0 4px 20px rgba(249,115,22,.25);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary:        #22C4F0;
-    --secondary:      #FB923C;
-    --accent:         #2DD4BF;
-    --bg:             #0F172A;
-    --bg-muted:       #334155;
-    --bg-card:        #1E293B;
-    --text:           #F1F5F9;
-    --text-muted:     #94A3B8;
-    --border:         #334155;
-    --shadow-sm:      0 1px 3px rgba(0,0,0,.3);
-    --shadow:         0 4px 16px rgba(0,0,0,.35);
-    --shadow-lg:      0 12px 40px rgba(0,0,0,.4);
-    --primary-light:  rgba(34,196,240,.12);
-  }
-}
 
 /* ── RESET ── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -88,9 +71,6 @@ h1, h2, h3, h4, h5 {
   border-bottom:1px solid var(--border);
   box-shadow:var(--shadow-sm);
   transition:background .3s;
-}
-@media (prefers-color-scheme: dark) {
-  .nav { background:rgba(15,23,42,.92); }
 }
 
 .nav-logo { display:flex; align-items:center; flex-shrink:0; }
@@ -226,9 +206,6 @@ section { padding:5.5rem 5%; }
   padding:0 5%; position:relative; overflow:hidden;
   background: linear-gradient(145deg, #f0fbff 0%, #e8f8fd 30%, #f5fffe 60%, #fff8f0 100%);
 }
-@media (prefers-color-scheme: dark) {
-  .hero { background:linear-gradient(145deg, #0a0f1e 0%, #0d1a2e 40%, #0a1f1a 100%); }
-}
 .hero-grid {
   position:absolute; inset:0; pointer-events:none;
   background-image:
@@ -252,9 +229,6 @@ section { padding:5.5rem 5%; }
   border-radius: 22px; padding: 1.75rem;
   width: 100%; max-width: 380px;
   box-shadow: 0 24px 64px rgba(19,178,228,.12), 0 4px 20px rgba(0,0,0,.07);
-}
-@media (prefers-color-scheme: dark) {
-  .panel-card { background: rgba(30,41,59,.88); border-color: rgba(34,196,240,.2); }
 }
 .panel-header {
   display: flex; align-items: center; gap: .5rem; margin-bottom: 1.25rem;
@@ -299,9 +273,6 @@ section { padding:5.5rem 5%; }
 .panel-badge-float i { color: var(--primary); }
 .panel-badge-1 { top: -18px; left: -28px; animation: floatIcon 6s ease-in-out infinite; }
 .panel-badge-2 { bottom: -14px; right: -18px; animation: floatIcon 6s ease-in-out 3s infinite; }
-@media (prefers-color-scheme: dark) {
-  .panel-badge-float { background: rgba(30,41,59,.96); border-color: rgba(255,255,255,.12); }
-}
 .hero-badge {
   display:inline-flex; align-items:center; gap:.45rem;
   background:var(--primary-light); border:1.5px solid rgba(19,178,228,.35);
@@ -558,7 +529,6 @@ section { padding:5.5rem 5%; }
 }
 .val-card:hover { border-color:var(--primary); transform:translateY(-4px); box-shadow:var(--shadow); }
 .val-num { font-size:2.5rem; font-weight:900; color:var(--primary-light); line-height:1; margin-bottom:.75rem; font-family:'Montserrat',sans-serif; }
-@media (prefers-color-scheme: dark) { .val-num { color:rgba(34,196,240,.2); } }
 .val-card h3 { font-size:1rem; font-weight:700; margin-bottom:.4rem; }
 .val-card p { color:var(--text-muted); font-size:.875rem; line-height:1.65; }
 
