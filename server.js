@@ -10,6 +10,15 @@ const app    = express();
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 app.use(express.json());
+
+// Redirect www → apex for canonical SEO
+app.use((req, res, next) => {
+  if (req.headers.host && req.headers.host.startsWith('www.')) {
+    return res.redirect(301, `https://drfixitmobile.ca${req.url}`);
+  }
+  next();
+});
+
 app.use(express.static(__dirname));
 
 const SYSTEM = `You are the AI assistant for Dr. Fixit Mobile, a professional device repair shop in Calgary and Strathmore, Alberta, Canada.
