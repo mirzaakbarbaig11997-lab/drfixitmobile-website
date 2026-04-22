@@ -131,7 +131,8 @@ app.post('/api/sezzle/checkout', async (req, res) => {
     });
 
     const data = await r.json();
-    const checkoutLink = data.links?.find(l => l.rel === 'checkout')?.href;
+    const checkoutLink = data.order?.checkout_url
+      || data.links?.find(l => l.rel === 'checkout')?.href;
     if (!checkoutLink) throw new Error('No checkout URL returned: ' + JSON.stringify(data));
 
     res.json({ checkout_url: checkoutLink, ref: refId });
