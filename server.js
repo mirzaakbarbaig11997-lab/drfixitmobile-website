@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import diagnosticsRouter from './src/diagnostics/controller.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
@@ -10,6 +11,7 @@ const app    = express();
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 app.use(express.json());
+app.use('/api/v1', diagnosticsRouter);
 
 // Redirect www → apex for canonical SEO
 app.use((req, res, next) => {
