@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import express from 'express';
+import compression from 'compression';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import diagnosticsRouter from './src/diagnostics/controller.js';
@@ -11,6 +12,7 @@ const app    = express();
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 app.use(express.json());
+app.use(compression());
 app.use('/api/v1', diagnosticsRouter);
 
 // Redirect www → apex for canonical SEO
@@ -21,7 +23,18 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname, {
+  extensions: ['html'],
+  maxAge: '7d',
+  setHeaders: (res, filePath) => {
+    // HTML changes often; let it revalidate. Static assets can cache longer.
+    if (filePath.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    } else {
+      res.setHeader('Cache-Control', 'public, max-age=604800, immutable');
+    }
+  }
+}));
 
 const SYSTEM = `You are the AI assistant for Dr. Fixit Mobile, a professional device repair shop in Calgary and Strathmore, Alberta, Canada.
 
@@ -166,9 +179,9 @@ app.post('/api/chat', async (req, res) => {
     }
 });
 
-// Serve index.html for all other routes
-app.get('*', (_req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+// Any route that didn't match a static file or API route is a real 404
+app.use((_req, res) => {
+    res.status(404).sendFile(path.join(__dirname, '404.html'));
 });
 
 const PORT = process.env.PORT || 3000;
