@@ -440,7 +440,7 @@ section { padding:5.5rem 5%; }
 /* ══════════════════════════════════════
    LOCATION CARDS
 ══════════════════════════════════════ */
-.loc-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.75rem; margin-top:3rem; }
+.loc-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.75rem; margin-top:3rem; }
 .loc-card {
   background:var(--bg-card); border:1.5px solid var(--border);
   border-radius:var(--radius-2xl); padding:2.25rem; transition:all .28s; box-shadow:var(--shadow-sm);
